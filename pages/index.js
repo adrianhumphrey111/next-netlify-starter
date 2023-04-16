@@ -9,12 +9,60 @@ import dynamic from 'next/dynamic';
 import styled from 'styled-components'
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
+const LeadGenFormStyled = dynamic(() => import('./LeadGenForm'), { ssr: false });
 
+const StyledReactPlayer = styled(ReactPlayer)`
 
-const StyledLeadForm = styled.form`
-  position: absolute;
-  display: ${props => props.show ? "flex" : "none"}
 `
+
+const StyledLeadForm = styled.div`
+  display: ${props => props.show ? "flex" : "none"};
+  flex-direction: column;
+  position: absolute;
+  background: white;
+  z-index: 999;
+`
+
+const StyledContainer = styled.div`
+padding: 5rem 0;
+    /* flex: 1 1; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+`
+
+const Submit = styled.input`
+  font-size: 1.3rem;
+  background: none;
+  color: black;
+  width: 75%;
+  border-radius: 1.56rem;
+  border: 0.0625rem solid black;
+  margin: 2.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+`
+
+
+const Input = styled.input`
+  color: black;
+  font-size: 1.125rem;
+  background: none;
+  border: none;
+  border-bottom: 0.0625rem solid black;
+  margin: 2.5rem 0;
+  width: 90%;
+  display: block;
+  ::placeholder {
+    color: black;
+  };
+  :focus {
+    outline: none;
+  };
+`
+
 
 
 export default function Home() {
@@ -35,51 +83,24 @@ export default function Home() {
     }
   }
 
-  const LeadGenForm = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => {
-      play()
-      setShowLeadGenForm(false);
-      console.log(data);
-    } 
-  
-    console.log(watch("example")); // watch input value by passing the name of it
-  
-    return (
-      /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-      <StyledLeadForm show={showLeadGenForm} onSubmit={handleSubmit(onSubmit)}>
-        {/* register your input into the hook by invoking the "register" function */}
-        <input defaultValue="test" {...register("example")} />
-        
-        {/* include validation with required or other standard HTML validation rules */}
-        <input {...register("exampleRequired", { required: true })} />
-        {/* errors will return when field validation fails  */}
-        {errors.exampleRequired && <span>This field is required</span>}
-        
-        <input type="submit" />
-      </StyledLeadForm>
-    );
-  }
+  const handleSubmit = data => {
+    play()
+    setShowLeadGenForm(false);
+    console.log(data);
+  } 
 
   return (
     <div className="container">
-      <Head>
-        <title>Next.js Starter!</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <Header title="Welcome to my app!" />
-        
-        <ReactPlayer onProgress={onProgress} playing={isPlaying} url='https://player.vimeo.com/external/479429612.hd.mp4?s=429fdb1ec3becc4a77f0eacc567f1e6dc830564e&profile_id=174' />
+      <StyledContainer>
+        <StyledReactPlayer onProgress={onProgress} playing={isPlaying} url='https://player.vimeo.com/external/479429612.hd.mp4?s=429fdb1ec3becc4a77f0eacc567f1e6dc830564e&profile_id=174' />
+        <LeadGenFormStyled showLeadGenForm={showLeadGenForm} handleSubmit={handleSubmit}/>
         <div>
           <button onClick={play}>play</button>
           <button onClick={pause}>pause</button>
         </div>
-         <LeadGenForm/>
-      </main>
+      </StyledContainer>
 
-      <Footer />
+      
     </div>
   )
 }
