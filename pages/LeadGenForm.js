@@ -10,10 +10,11 @@ const GlobalStyle = createGlobalStyle`
   };
 ` 
 
-const StyledLeadForm = styled.form`
+const StyledLeadForm = styled.div`
   position: absolute;
   display: ${props => props.show ? "flex" : "none"};
   z-index: 999;
+  top: 250px;
 `
 
 const Container = styled.div `
@@ -76,12 +77,11 @@ const Submit = styled.input`
   cursor: pointer;
 `
 
-const LeadGenForm = ({showLeadGenForm}) => {
+const LeadGenForm = ({showLeadGenForm, handleLeadSubmit}) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => {
-      play()
-      setShowLeadGenForm(false);
-      console.log(data);
+    const onSubmit = (data, event) => {
+        event.preventDefault()
+        handleLeadSubmit(data)
     } 
   
     console.log(); // watch input value by passing the name of it
@@ -106,6 +106,7 @@ const LeadGenForm = ({showLeadGenForm}) => {
               type='text'
               name='phoneNumber'
               placeholder='Phone Number'
+              {...register("phoneNumber", { required: true })}
             />
           </div>
         

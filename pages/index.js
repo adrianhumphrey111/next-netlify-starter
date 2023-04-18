@@ -24,12 +24,13 @@ const StyledLeadForm = styled.div`
 `
 
 const StyledContainer = styled.div`
-padding: 5rem 0;
+    padding: 5rem 0;
     /* flex: 1 1; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
   
 `
 
@@ -63,6 +64,7 @@ const Input = styled.input`
   };
 `
 
+const VIDEO_URL = "https://vimeo.com/818887369"
 
 
 export default function Home() {
@@ -81,9 +83,10 @@ export default function Home() {
       setShowLeadGenForm(true);
       setHasPausedAt10(true);
     }
+    
   }
 
-  const handleSubmit = data => {
+  const handleLeadSubmit = data => {
     play()
     setShowLeadGenForm(false);
     console.log(data);
@@ -91,16 +94,19 @@ export default function Home() {
 
   return (
     <div className="container">
-      <StyledContainer>
-        <StyledReactPlayer onProgress={onProgress} playing={isPlaying} url='https://player.vimeo.com/external/479429612.hd.mp4?s=429fdb1ec3becc4a77f0eacc567f1e6dc830564e&profile_id=174' />
-        <LeadGenFormStyled showLeadGenForm={showLeadGenForm} handleSubmit={handleSubmit}/>
+        <StyledReactPlayer 
+          onClick={() => play()} 
+          onProgress={onProgress} 
+          playing={isPlaying} 
+          muted={false} 
+          url={VIDEO_URL} 
+          height='100vh'
+          light={<img src='https://example.com/thumbnail.png' alt='Thumbnail' />}/>
+        <LeadGenFormStyled showLeadGenForm={showLeadGenForm} handleLeadSubmit={handleLeadSubmit}/>
         <div>
           <button onClick={play}>play</button>
           <button onClick={pause}>pause</button>
         </div>
-      </StyledContainer>
-
-      
     </div>
   )
 }
