@@ -1,45 +1,13 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Helmet } from 'react-helmet'
-import styled, { createGlobalStyle } from 'styled-components'
+import styled from 'styled-components'
 
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    font-family: 'Roboto', sans-serif;
-  };
-` 
 
 const StyledLeadForm = styled.div`
   position: absolute;
   display: ${props => props.show ? "flex" : "none"};
   z-index: 999;
   top: 250px;
-`
-
-const Container = styled.div `
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  max-width: 25rem;
-  margin: 0 auto;
-  background: white;
-`
-
-const Title = styled.h1`
-  color: black;
-  font-size: 3rem;
-  font-weight: 500;
-  text-align: center;
-  letter-spacing: 0.0625rem;
-  margin-bottom: 0rem;
-`
-
-const Subtitle = styled.h3`
-  color: black;
-  font-weight: 100;
-  text-align: center;
-  letter-spacing: 0.0625rem;
-  padding: 0 3rem;
 `
 
 const Input = styled.input`
@@ -57,12 +25,6 @@ const Input = styled.input`
   :focus {
     outline: none;
   };
-`
-
-const Validation = styled.p`
-  color: black;
-  font-weight: 100;
-  font-size: 0.75rem;
 `
 
 const Submit = styled.input`
