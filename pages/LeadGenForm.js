@@ -8,6 +8,9 @@ const StyledLeadForm = styled.div`
   display: ${props => props.show ? "flex" : "none"};
   z-index: 999;
   top: 250px;
+  background: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  justify-content: center;
 `
 
 const Input = styled.input`
@@ -37,6 +40,7 @@ const Submit = styled.input`
   margin: 2.5rem;
   padding: 0.5rem;
   cursor: pointer;
+  
 `
 
 const LeadGenForm = ({showLeadGenForm, handleLeadSubmit}) => {

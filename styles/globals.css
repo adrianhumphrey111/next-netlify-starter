@@ -33,3 +33,32 @@ code {
   align-items: center;
   position: relative;
 }
+
+.unmute-button {
+  position: absolute;
+  top: 75px;
+  left: 10px;
+  background-color: blue;
+  border: 2px solid black;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 12px 24px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.unmute-button:hover {
+  background-color: darkblue;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.unmute-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

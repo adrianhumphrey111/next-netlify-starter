@@ -11,9 +11,42 @@ const StyledReactPlayer = styled(ReactPlayer)`
 
 `
 
+const UnmuteButton = styled.button`
+  position: absolute;
+  top: 75px;
+  left: 10px;
+  background-color: blue;
+  border: 2px solid black;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 12px 24px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  outline: none;
+  &:hover {
+    background-color: darkblue;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+
 const StyledThumbnail = styled.img`
   height: 85vh;
 `
+
+const VideoPlayerContainer = styled.div`
+  position: relative;
+`;
+
 
 const VIDEO_URL = "https://vimeo.com/818887369"
 
@@ -24,6 +57,7 @@ export default function Home() {
   const [showCalendyWidget, setShowCalendyWidget] = useState(false)
   const [hasPausedAt26, setHasPausedAt26] = useState(false);
   const [hasPausedAt308, setHasPausedAt308] = useState(false);
+  const [isMuted, setIsMuted] = useState(true)
 
   useEffect( () => {
     function isCalendlyEvent(e) {
@@ -50,6 +84,10 @@ export default function Home() {
   const play = () => setIsPlaying(true)
   
   const pause = () => setIsPlaying(false)
+
+  const unmute = () => {
+    setIsMuted(false)
+  }
  
   const onProgress = ({playedSeconds}) => {
     if(!hasPausedAt26 && playedSeconds >= 25){
@@ -76,18 +114,19 @@ export default function Home() {
 
   return (
     <div className="container">
+        <button className='unmute-button' onClick={() => unmute()}>Unmute</button>
         <StyledReactPlayer 
           onClick={() => play()} 
           onProgress={onProgress} 
           playing={isPlaying} 
-          muted={false} 
+          muted={isMuted} 
           controls={false}
           url={VIDEO_URL} 
           height='100vh'
           light={<StyledThumbnail src='/thumbnail.jpg' alt='Thumbnail' />}/>
         <LeadGenFormStyled showLeadGenForm={showLeadGenForm} handleLeadSubmit={handleLeadSubmit}/>
         <CalendyWidget showCalendyWidget={showCalendyWidget}/>
-        <button onClick={() => play()}>play</button>
+        
     </div>
   )
 }
