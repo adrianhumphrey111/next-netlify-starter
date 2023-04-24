@@ -63,6 +63,15 @@ export default function Home() {
     function isCalendlyEvent(e) {
       return e.origin === "https://calendly.com" && e.data.event && e.data.event.indexOf("calendly.") === 0;
     };
+
+    function receiveMessage(event) {
+      if (event.data.action === 'parentUnMuteAction') {
+        // Handle the button click from the parent window
+        console.log('Button clicked in the parent window');
+      }
+    }
+
+    window.addEventListener('message', receiveMessage, false);
      
     window.addEventListener("message", function(e) {
       if(isCalendlyEvent(e)) {
