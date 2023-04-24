@@ -48,7 +48,7 @@ const VideoPlayerContainer = styled.div`
 `;
 
 
-const VIDEO_URL = "https://vimeo.com/818887369"
+const VIDEO_URL = "https://adrianhumphrey374.wistia.com/medias/p3gk97qit5"
 
 
 export default function Home() {
@@ -128,6 +128,7 @@ export default function Home() {
   return (
     <div className="container">
         <button className='unmute-button' onClick={() => unmute()}>Unmute</button>
+        <button className='unmute-button' onClick={() => play()}>play</button>
         <StyledReactPlayer 
           onClick={() => play()} 
           onProgress={onProgress} 
