@@ -55,6 +55,7 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [showLeadGenForm, setShowLeadGenForm] = useState(false)
   const [showCalendyWidget, setShowCalendyWidget] = useState(false)
+  const [controls, setControls] = useState(true)
   const [hasPausedAt26, setHasPausedAt26] = useState(false);
   const [hasPausedAt308, setHasPausedAt308] = useState(false);
   const [isMuted, setIsMuted] = useState(true)
@@ -105,6 +106,7 @@ export default function Home() {
   const onProgress = ({playedSeconds}) => {
     if(!hasPausedAt26 && playedSeconds >= 25){
       // pause the video and show the form in the video
+      setControls(false)
       setIsPlaying(false);
       setShowLeadGenForm(true);
       setHasPausedAt26(true);
@@ -134,7 +136,7 @@ export default function Home() {
           onProgress={onProgress} 
           playing={isPlaying} 
           muted={isMuted} 
-          controls={false}
+          controls={controls}
           url={VIDEO_URL} 
           height='100vh'
           light={<StyledThumbnail src='/thumbnail.jpg' alt='Thumbnail' />}/>
