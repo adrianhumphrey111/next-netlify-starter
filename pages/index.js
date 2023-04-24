@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components'
+import axios from 'axios';
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 const LeadGenFormStyled = dynamic(() => import('./LeadGenForm'), { ssr: false });
@@ -121,16 +122,29 @@ export default function Home() {
     
   }
 
-  const handleLeadSubmit = data => {
-    play()
-    setShowLeadGenForm(false);
-    console.log(data);
+  const handleLeadSubmit = async data => {
+    try {
+      await axios.post("https://hooks.zapier.com/hooks/catch/14481677/32e7vq8/", {
+        body: {
+          contact: {
+              "full_name": data.name,
+              "email": data.email,
+              "phone_number": data.phoneNumber
+          }
+      }
+      })
+    }catch(e){
+      console.log(e)
+    }finally {
+      setShowLeadGenForm(false);
+      play()
+      console.log(data);
+    }
   } 
 
   return (
     <div className="container">
         <button className='unmute-button' onClick={() => unmute()}>Unmute</button>
-        <button className='unmute-button' onClick={() => play()}>play</button>
         <StyledReactPlayer 
           onClick={() => play()} 
           onProgress={onProgress} 
