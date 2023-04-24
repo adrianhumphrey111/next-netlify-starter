@@ -121,16 +121,15 @@ export default function Home() {
     }
     
   }
-
   const handleLeadSubmit = async data => {
     try {
-      await axios.post("https://hooks.zapier.com/hooks/catch/14481677/32e7vq8/", {
+      await axios.post("https://zapier-webservice.onrender.com/register", {
         body: {
-          contact: {
+          
               "full_name": data.name,
               "email": data.email,
               "phone_number": data.phoneNumber
-          }
+          
       }
       })
     }catch(e){
