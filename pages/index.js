@@ -87,6 +87,7 @@ export default function Home() {
           light={<StyledThumbnail src='/thumbnail.jpg' alt='Thumbnail' />}/>
         <LeadGenFormStyled showLeadGenForm={showLeadGenForm} handleLeadSubmit={handleLeadSubmit}/>
         <CalendyWidget showCalendyWidget={showCalendyWidget}/>
+        <button onClick={() => play()}>play</button>
     </div>
   )
 }
