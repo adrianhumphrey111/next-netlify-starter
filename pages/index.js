@@ -63,17 +63,21 @@ export default function Home() {
     function isCalendlyEvent(e) {
       return e.origin === "https://calendly.com" && e.data.event && e.data.event.indexOf("calendly.") === 0;
     };
-
-    function receiveMessage(event) {
-      if (event.data.action === 'parentUnMuteAction') {
-        // Handle the button click from the parent window
-        console.log('Button clicked in the parent window');
-      }
-    }
-
-    window.addEventListener('message', receiveMessage, false);
      
     window.addEventListener("message", function(e) {
+
+      if (e.data.action === 'parentUnMuteAction') {
+        // Handle the button click from the parent window
+        console.log('Button clicked in the parent window');
+        setIsMuted(false)
+      }
+
+      if (e.data.action === 'parentPlayAction') {
+        // Handle the button click from the parent window
+        console.log('Button clicked in the parent window play');
+        setIsPlaying(true)
+      }
+
       if(isCalendlyEvent(e)) {
         /* Example to get the name of the event */
         console.log("Event name:", e.data.event);
