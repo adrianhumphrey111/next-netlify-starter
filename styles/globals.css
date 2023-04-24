@@ -34,7 +34,6 @@ code {
 }
 
 .unmute-button {
-  position: absolute;
   top: 75px;
   left: 10px;
   background-color: blue;
