@@ -138,6 +138,7 @@ export default function Home() {
           muted={isMuted} 
           controls={controls}
           url={VIDEO_URL} 
+          width='100%'
           height='100vh'
           light={<StyledThumbnail src='/thumbnail.jpg' alt='Thumbnail' />}/>
         <LeadGenFormStyled showLeadGenForm={showLeadGenForm} handleLeadSubmit={handleLeadSubmit}/>
