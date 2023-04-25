@@ -91,6 +91,21 @@ export default function Home() {
           console.log("we schedule an event")
           setShowCalendyWidget(false)
           setIsPlaying(true)
+
+          function gtag_report_conversion(url) {
+            var callback = function () {
+              if (typeof(url) != 'undefined') {
+                window.location = url;
+              }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-11137285033/5sTLCNm9mZoYEKn31b4p',
+                'event_callback': callback
+            });
+            return false;
+          }
+
+          gtag_report_conversion()
         }
       }
     });
@@ -142,6 +157,19 @@ export default function Home() {
   const handleLeadSubmit = async data => {
     const validatedNumber = validatePhoneNumber(data.phoneNumber);
     try {
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-11137285033/5sTLCNm9mZoYEKn31b4p',
+            'event_callback': callback
+        });
+        return false;
+      }
+      gtag_report_conversion()
       await axios.post("https://zapier-webservice.onrender.com/register",  {
               "full_name": data.name,
               "email": data.email,
