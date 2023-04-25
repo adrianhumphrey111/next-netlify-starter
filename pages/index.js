@@ -121,12 +121,31 @@ export default function Home() {
     }
     
   }
+
+  const validatePhoneNumber = (phone) => {
+    // Remove all non-digit characters from the input string
+    const digitsOnly = phone.replace(/\D/g, '');
+  
+    // Check if the phone number starts with '1' and has 11 digits (country code + 10 digits)
+    // Or if the phone number has 10 digits (assuming the country code is not provided)
+    if ((digitsOnly.length === 11 && digitsOnly.startsWith('1')) || digitsOnly.length === 10) {
+      // Add the country code if it's not provided
+      const formattedNumber = digitsOnly.length === 11 ? '+' + digitsOnly : '+1' + digitsOnly;
+  
+      return formattedNumber;
+    } else {
+      // If the phone number is not valid, return an error message
+      return 'Invalid phone number';
+    }
+  }
+
   const handleLeadSubmit = async data => {
+    const validatedNumber = validatePhoneNumber(data.phoneNumber);
     try {
       await axios.post("https://zapier-webservice.onrender.com/register",  {
               "full_name": data.name,
               "email": data.email,
-              "phone_number": data.phoneNumber
+              "phone_number": validatedNumber
       })
     }catch(e){
       console.log(e)

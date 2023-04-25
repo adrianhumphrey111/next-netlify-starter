@@ -2,12 +2,15 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+
 
 const StyledLeadForm = styled.div`
   position: absolute;
   display: ${props => props.show ? "flex" : "none"};
   z-index: 999;
-  top: 250px;
+  top: 150px;
   background: rgba(255, 255, 255, 0.7);
   width: 100%;
   justify-content: center;
