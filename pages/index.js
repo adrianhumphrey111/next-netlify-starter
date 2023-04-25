@@ -111,7 +111,23 @@ export default function Home() {
     });
   }, [])
 
-  const play = () => setIsPlaying(true)
+  const play = () => {
+
+    const gtag_report_conversion = (url) => {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-11137285033/izP4CMvKrZoYEKn31b4p',
+            'event_callback': callback
+        });
+        return false;
+      }
+      gtag_report_conversion()
+      setIsPlaying(true)
+  } 
   
   const pause = () => setIsPlaying(false)
 
