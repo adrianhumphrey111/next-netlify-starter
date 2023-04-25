@@ -123,14 +123,10 @@ export default function Home() {
   }
   const handleLeadSubmit = async data => {
     try {
-      await axios.post("https://zapier-webservice.onrender.com/register", {
-        body: {
-          
+      await axios.post("https://zapier-webservice.onrender.com/register",  {
               "full_name": data.name,
               "email": data.email,
               "phone_number": data.phoneNumber
-          
-      }
       })
     }catch(e){
       console.log(e)
